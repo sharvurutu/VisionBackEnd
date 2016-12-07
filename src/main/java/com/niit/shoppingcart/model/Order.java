@@ -3,10 +3,13 @@ package com.niit.shoppingcart.model;
 import java.io.Serializable;
 import java.util.UUID;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
@@ -16,12 +19,28 @@ import org.springframework.stereotype.Component;
 public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@NotNull
+	@Column(name = "ID")
 	private String id;
+	
+	@NotNull
+	@Column(name = "U_ID")
 	private String u_id;
-	private Cart cart;
+	
+	private MyCart myCart;
+	
+	@NotNull
+	@Column(name = "B_ID")
 	private Billingaddress b_id;
+	
+	@NotNull
+	@Column(name = "SH_ID")
 	private Shippingaddress sh_id;
+	
 	private long total;
+	
 	private String paymentMethod;
 	
 	public Order()

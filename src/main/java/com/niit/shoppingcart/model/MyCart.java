@@ -11,30 +11,46 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table
 @Component
-public class Cart {
+public class MyCart {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
-	//private String userID;
-	@Column(name="PRODUCT_NAME")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@NotNull
+	@Column(name = "ID")
+	private long id;
+
+	@NotNull
+	@Column(name = "userID")
+	private String userID;
+
+	@NotNull
+	@Column(name = "PRODUCT_NAME")
 	private String productName;
+
+	@NotNull
+	@Column(name = "PRICE")
 	private int price;
+
+	@NotNull
+	@Column(name = "QUANTITY")
 	private int quantity;
+
 	@Transient
 	private int total;
+
 	private char status;
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId(long l) {
+		this.id = l;
 	}
 
 	public int getTotal() {
@@ -45,13 +61,13 @@ public class Cart {
 		this.total = total;
 	}
 
-	/*public String getUserID() {
+	public String getUserID() {
 		return userID;
 	}
 
 	public void setUserID(String userID) {
 		this.userID = userID;
-	}*/
+	}
 
 	public String getProductName() {
 		return productName;
@@ -86,43 +102,3 @@ public class Cart {
 	}
 
 }
-
-/*@Entity
-@Table(name = "cart")
-@Component
-public class Cart {
-	
-	@Id
-	private String id;
-	private int price;
-	private int quantity;
-	private String p_id;
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	
-	public int getPrice() {
-		return price;
-	}
-	public void setPrice(int price) {
-		this.price = price;
-	}
-	public int getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-	public String getP_id() {
-		return p_id;
-	}
-	public void setP_id(String product_id) {
-		this.p_id = product_id;
-	}
-
-	
-}
-*/

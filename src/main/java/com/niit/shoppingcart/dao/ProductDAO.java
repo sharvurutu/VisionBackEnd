@@ -16,6 +16,4 @@ public interface ProductDAO {
 	
 	public List<Product> getSimilarProducts(String searchText);
 
-	public Product get(int id);
-
 }

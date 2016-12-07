@@ -19,25 +19,28 @@ import org.springframework.stereotype.Component;
 @Table(name = "category")
 @Component
 public class Category {
+
 	private Set<Product> products;
-	
-	@OneToMany(mappedBy="category",fetch =FetchType.EAGER)
-	public Set<Product> getProducts()
-	{
+
+	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
+	public Set<Product> getProducts() {
 		return products;
 	}
-	public void setProducts(Set<Product> products)
-	{
+
+	public void setProducts(Set<Product> products) {
 		this.products = products;
 	}
+
 	@Id
 	@NotNull
-	@Column(name= "ID")
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "ID")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String id;
+
 	@NotNull
 	@Column(name = "name")
 	private String name;
+
 	@NotNull
 	@Column(name = "description")
 	private String description;
@@ -62,10 +65,8 @@ public class Category {
 		return description;
 	}
 
-	public void setDescription(String description)
-	{
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
 }
-

@@ -77,10 +77,5 @@ public class Billingaddress {
 	public void setPin(String pin) {
 		this.pin = pin;
 	}
-	
-	
-	
-	
-	
 
 }

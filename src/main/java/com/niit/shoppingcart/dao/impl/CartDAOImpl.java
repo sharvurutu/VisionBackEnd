@@ -2,6 +2,7 @@ package com.niit.shoppingcart.dao.impl;
 
 import java.util.List;
 
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -12,7 +13,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.shoppingcart.dao.CartDAO;
-import com.niit.shoppingcart.model.Cart;
+import com.niit.shoppingcart.model.MyCart;
+
 
 @Repository("cartDAO")
 public class CartDAOImpl implements CartDAO {
@@ -30,60 +32,85 @@ public class CartDAOImpl implements CartDAO {
 	}
 
 	@Transactional
-	public void save(MyCart mycart) {
+	public void save(MyCart myCart) {
 		log.debug("Starting of the method save");
 		myCart.setId(getMaxId());
-		sessionFactory.getCurrentSession().save(cart);
-		return true;
-	}catch(
-
-	HibernateException e)
-	{
-
-		e.printStackTrace();
-		return false;
-	}
+		sessionFactory.getCurrentSession().save(myCart);
+		log.debug("Ending of the method save");
 	}
 
 	@Transactional
 
-	public void update(MyCart mycart) {
+	public void update(MyCart myCart) {
 		log.debug("Starting of the method update");
 		sessionFactory.getCurrentSession().update(myCart);
 		log.debug("Ending of the method update");
-
 	}
 
 	@Transactional
 
-	public boolean delete(Cart cart) {
-		try {
+	public String delete(String id) {
+		log.debug("Starting of the method delete");
+		MyCart myCart = new MyCart();
+		myCart.setUserID(id);
+		try
+		{
+			sessionFactory.getCurrentSession().delete(myCart);
 
-			/*
-			 * if (get(cart.getId()) == null) { return false; }
-			 */
-			sessionFactory.getCurrentSession().delete(cart);
-			return true;
-		} catch (Exception e) {
+		} catch (HibernateException e) {
 
 			e.printStackTrace();
-			return false;
+			return e.getMessage();
 		}
 
 	}
 
 	@Transactional
-
-	public Cart get(String id) {
-		return (Cart) sessionFactory.getCurrentSession().get(Cart.class, id);
-
+	public Long getTotalAmount(String id)
+	{
+		log.debug("Starting of the method getTotalAmount");
+		String hql = "select sum(price) from MyCart where userID="+ " ' "+id+" ' "+" and status ="+"'N'";
+		log.debug("hql"+hql);
+		
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		Long sum = (Long) query.uniqueResult();
+		log.debug("sum=" +sum);
+		
+		log.debug("Ending of the method getTotalAmount");
+		return sum;
 	}
 
 	@Transactional
-	public List<MyCart> list() {
-		String hql = "from cart";
+	private long getMaxId()
+	{
+		log.debug("Starting of the method getMaxId");
+		long maxID = 100L;
+		try
+		{
+			String hql = "select max(id) from MyCart";
+			Query query = sessionFactory.getCurrentSession().createQuery(hql);
+			maxID= (Long) query.uniqueResult();
+		}
+		catch(HibernateException e)
+		{
+			log.debug("It seems this is first record. setting initial id is 100:");
+			maxID = 100L;
+			e.printStackTrace();
+		}
+		log.debug("Max id:"+maxID);
+		
+		log.debug("Ending of the method getMaxId");
+		return maxID;
+	}
+	
+	@Transactional
+	public List<MyCart> list(String id) {
+		log.debug("Starting of the method list");
+		String hql = "from MyCart where userID=" + " ' " + id + " ' and status =" + "'N'";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		return query.list();
+		List<MyCart> list = (List<MyCart>) query.list();
+		log.debug("Ending of the method list");
+		return list;
 	}
 
 }

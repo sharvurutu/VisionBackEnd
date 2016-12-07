@@ -1,8 +1,12 @@
 package com.niit.shoppingcart.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
@@ -14,13 +18,34 @@ import javax.persistence.ManyToOne;
 @Table(name = "product")
 @Component
 public class Product {
+	
+	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@NotNull
+	@Column(name = "ID")
 	private String id;
+	
+	@NotNull
+	@Column(name = "NAME")
 	private String name;
+	
+	@NotNull
+	@Column(name = "PRICE")
 	private int price;
+	
+	@NotNull
+	@Column(name = "STOCK")
 	private int stock;
+	
+	@NotNull
+	@Column(name = "C_ID")
 	private String c_id;
+	
+	@NotNull
+	@Column(name = "S_ID")
 	private String s_id;
+	
 	@ManyToOne
 	@JoinColumn(name="category_id",updatable=false,insertable=false,nullable=false)
 	private Category category;

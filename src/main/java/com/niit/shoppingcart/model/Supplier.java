@@ -1,53 +1,71 @@
 package com.niit.shoppingcart.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import java.util.Set;
+
+
+import javax.persistence.*;
+
 
 import org.springframework.stereotype.Component;
 
-@Entity
-@Table(name="supplier")
-@Component
-public class Supplier {
-    
 
-	@Id
-	@NotNull
-	@Column(name="id")
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private String id;
+@Entity
+@Component
+@Table(name="Supplier")
+public class Supplier {
 	
-	@NotNull
+	@Id
+	private String Id;
+	
 	@Column(name="name")
 	private String name;
 	
-	@NotNull
-	@Column(name="address")
-	private String address;
+	@Column(name="ADDRESS")
+	private String description;
+
+	
+	@OneToMany(mappedBy="supplier",fetch=FetchType.EAGER)
+	private Set<Product> products;
+	
 	
 	public String getId() {
-		return id;
+		return Id;
 	}
+
+
+	
 	public void setId(String id) {
-		this.id = id;
+		Id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getAddress() {
-		return address;
+
+	public String getDescription() {
+		return description;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+
+	public Set<Product> getProducts() {
+		return products;
+	}
+
+
+
+	public void setProducts(Set<Product> products) {
+		this.products = products;
 	}
 	
 	
+
 }

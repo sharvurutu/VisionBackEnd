@@ -1,86 +1,104 @@
 package com.niit.shoppingcart.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Table(name = "user")
 @Component
-public class User implements Serializable{
-	private static final long serialVersionUID = 1L;
+@Table(name = "User")
+public class User {
+	
 
-	@Id
-	@NotNull
-	@Column(name="id")
-	private String id;
-	
-	@NotEmpty(message="please enter your name")
-	@Size(min=3, max=35)
-	@Column(name="name")
-	private String name;
-	
-	@Min(5)
-	@Max(15)
-	private String password;
-	
-	@NotNull
-	@Column(name="contact")
-	private int contact;
-	
-	@NotNull
-	@Size(min=5, max=35)
-	@Column(name="address")
-	private String address;
-	
-	@Pattern(regexp=".+@.+\\..+", message="Wrong email...")
-	@Column(name="email")
-	@NotEmpty(message="please enter your mail id")
+	public User(){
+		
+		System.out.println("User");
+	}
+
+@NotBlank(message="Please Enter your First Name")
+@Column(name = "name")
+private String name;
+
+@NotBlank(message="Please Enter your Last Name")
+@Column(name = "last_name")
+	private String last_name;
+
+@NotBlank(message="Please Enter your Mobile Number")
+@Pattern(regexp="(^$|[0-9]{10})",message="Mobile Number should be only numbers")
+@Column(name = "contact")
+	private String contact;  
+
+@Id
+private String Id;
+
+
+
+@NotBlank(message="Please Enter your Email Id")
+@Column(name = "mail")
 	private String mail;
+
+@NotBlank(message="Password and Confirm Password Does not match")
+@Size(min=5,max=10,message="Password size must be between 5 to 10")
+@Column(name = "password")
+	private String password;
+
+@NotBlank
+@Column(name= "address")
+private String address;
+
+
+private String role;
+
+@Transient
+private String ConfirmPassword;
 	
-	
-	private String role;
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+
+
+
+
+public String getConfirmPassword() {
+	return ConfirmPassword;
+}
+public void setConfirmPassword(String comPassword) {
+	ConfirmPassword = comPassword;
+}
+
+
+public String getRole() {
+	return role;
+}
+public void setRole(String role) {
+	this.role = role;
+}
+
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getPassword() {
-		return password;
+	public String getLast_name() {
+		return last_name;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setLast_name(String last_name) {
+		this.last_name = last_name;
 	}
-	public int getContact() {
+	public String getContact() {
 		return contact;
 	}
-	public void setContact(int contact) {
+	public void setContact(String contact) {
 		this.contact = contact;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
 	}
 	public String getMail() {
 		return mail;
@@ -88,13 +106,31 @@ public class User implements Serializable{
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
-	public String getRole() {
-		return role;
-	}
-	public void setRole(String role) {
-		this.role = role;
-	}
-	
-	
+	public String getPassword() {
 
+		return password;
+	}
+	public void setPassword(String password) {
+		if(password.equals(ConfirmPassword))
+		{
+			this.password = password;
+		}
+		else
+			this.password=null;
+	}
+	
+	public String getId() {
+		return Id;
+	}
+	public void setId(String id) {
+		Id = id;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	
 }

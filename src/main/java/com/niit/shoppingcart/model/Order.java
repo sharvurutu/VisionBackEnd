@@ -1,83 +1,155 @@
 package com.niit.shoppingcart.model;
 
+import javax.persistence.Table;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.persistence.*;
 
-import org.springframework.stereotype.Component;
+//@Entity
+//@Table(name="UserOrder")
 
-@Entity
-@Table(name = "order1")
 @Component
 public class Order implements Serializable {
+	
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
+
+
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@NotNull
-	@Column(name = "ID")
-	private String id;
+	//@Id
+	private String Id;
 	
-	@NotNull
-	@Column(name = "U_ID")
-	private String u_id;
+	private String sa;
+
+	private String ba;
 	
-	private MyCart myCart;
+	private String pm;
 	
-	@NotNull
-	@Column(name = "B_ID")
-	private Billingaddress b_id;
+	//@Column(name="Product_Name")
+	private String Product_Name;
 	
-	@NotNull
-	@Column(name = "SH_ID")
-	private Shippingaddress sh_id;
+	//@Column(name="Product_price")
+	private int Product_Price;
 	
-	private long total;
+/*	@Column(name="User_Id")
+*/	private String User_Id;
 	
-	private String paymentMethod;
+	
+
+	//@Column(name = "Pay_Method")
+	
+    @Autowired
+	private PaymentMethod paymentMethod;
+	
+	//
+	//@Column(name="ShippingAddress")
+	@Autowired
+	private ShippingAddress shippingAddress;
+	
+	//@Column(name="BillingAddress")
+	@Autowired
+	private BillingAddress billingAddress;
+
 	
 	public Order()
 	{
-		this.id= "SHP_CRT_ORD_" + UUID.randomUUID();
+		System.out.println("UserOrder is created");
+		this.Id= "Yamaha_Online" + UUID.randomUUID();
 	}
+	
+	
 	public String getId() {
-		return id;
+		return Id;
 	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	/*public String getCart() {
-		return cart_id;
-	}
-	public void setCart_id(String cart_id) {
-		this.cart_id = cart_id;
-	}
-	public String getB_id() {
-		return b_id;
-	}
-	public void setB_id(String b_id) {
-		this.b_id = b_id;
-	}
-	public String getSh_id() {
-		return sh_id;
-	}
-	public void setSh_id(String sh_id) {
-		this.sh_id = sh_id;
-	}*/
-	public long getTotal() {
-		return total;
-	}
-	public void setTotal(long total) {
-		this.total = total;
-	}
-	
-	
 
+	public void setId(String id) {
+		Id = id;
+	}
+
+	
+	public String getProduct_Name() {
+		return Product_Name;
+	}
+
+	public void setProduct_Name(String product_Name) {
+		Product_Name = product_Name;
+	}
+
+	public int getProduct_Price() {
+		return Product_Price;
+	}
+
+	public void setProduct_Price(int product_Price) {
+		Product_Price = product_Price;
+	}
+
+	public String getUser_Id() {
+		return User_Id;
+	}
+
+	public void setUser_Id(String user_Id) {
+		User_Id = user_Id;
+	}
+
+
+	public ShippingAddress getShippingAddress() {
+		return shippingAddress;
+	}
+	public void setShippingAddress(ShippingAddress shippingAddress) {
+		this.shippingAddress = shippingAddress;
+	}
+
+	public BillingAddress getBillingAddress() {
+		return billingAddress;
+	}
+
+	public void setBillingAddress(BillingAddress billingAddress) {
+		this.billingAddress = billingAddress;
+	}
+	
+	public PaymentMethod getPaymentMethod() {
+		return paymentMethod;
+	}
+
+	public void setPaymentMethod(PaymentMethod paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+
+	public String getSa() {
+		return sa;
+	}
+
+	public void setSa(String sa) {
+		this.sa = sa;
+	}
+
+	public String getBa() {
+		return ba;
+	}
+
+	public void setBa(String ba) {
+		this.ba = ba;
+	}
+
+
+	public String getPm() {
+		return pm;
+	}
+
+
+	public void setPm(String pm) {
+		this.pm = pm;
+	}
+
+
+	
+	
+	
 }

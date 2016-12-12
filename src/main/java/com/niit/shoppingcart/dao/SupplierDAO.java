@@ -5,13 +5,15 @@ import java.util.List;
 import com.niit.shoppingcart.model.Supplier;
 
 public interface SupplierDAO {
-
-	public Supplier get(String id);
-
+	
+	public boolean save(Supplier supplier);
+	
+	public boolean delete(Supplier supplier);
+	
+	public boolean udpate(Supplier supplier);
+	
+	public Supplier get(String Id);
+	
 	public List<Supplier> list();
-
-	public boolean saveOrUpdate(Supplier supplier);
-
-	public boolean delete(String id);
 
 }

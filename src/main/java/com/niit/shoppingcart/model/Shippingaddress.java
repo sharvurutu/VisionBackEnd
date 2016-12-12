@@ -1,68 +1,65 @@
 package com.niit.shoppingcart.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.Set;
+
+import javax.persistence.*;
+
 
 import org.springframework.stereotype.Component;
 
-@Entity
-@Table(name = "shippingaddress")
+//@Entity
+//@Table(name="ShippingAddress")
+
 @Component
-public class Shippingaddress {
+public class ShippingAddress implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@NotNull
-	@Column(name = "ID")
-	private String id;
-
-	@NotNull
-	@Column(name = "h_no")
-	private String h_no;
-
-	@NotNull
-	@Column(name = "street")
-	private String street;
-
-	@NotNull
-	@Column(name = "city")
+	
+	private String address_line1;
+	
+	private String address_line2;
+	
+	private String state;
+	
 	private String city;
-
-	@NotNull
-	@Column(name = "country")
-	private String country;
-
-	@NotNull
-	@Column(name = "pin")
-	private String pin;
-
-	public String getId() {
-		return id;
+	
+	private String pincode;
+	
+	
+	
+	
+	@Override
+	public String toString() {
+		return "ShippingAddress [" + address_line1 + "," + address_line2 + ","	+ state + "," + city + "," + pincode + "]";
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public String getAddress_line1() {
+		return address_line1;
 	}
 
-	public String getH_no() {
-		return h_no;
+	public void setAddress_line1(String address_line1) {
+		this.address_line1 = address_line1;
 	}
 
-	public void setH_no(String h_no) {
-		this.h_no = h_no;
+	public String getAddress_line2() {
+		return address_line2;
 	}
 
-	public String getStreet() {
-		return street;
+	public void setAddress_line2(String address_line2) {
+		this.address_line2 = address_line2;
 	}
 
-	public void setStreet(String street) {
-		this.street = street;
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 	public String getCity() {
@@ -73,20 +70,15 @@ public class Shippingaddress {
 		this.city = city;
 	}
 
-	public String getCountry() {
-		return country;
+	public String getPincode() {
+		return pincode;
 	}
 
-	public void setCountry(String country) {
-		this.country = country;
+	public void setPincode(String pincode) {
+		this.pincode = pincode;
 	}
 
-	public String getPin() {
-		return pin;
-	}
-
-	public void setPin(String pin) {
-		this.pin = pin;
-	}
+	
+	
 
 }

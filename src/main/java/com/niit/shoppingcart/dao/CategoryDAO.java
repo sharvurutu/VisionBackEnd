@@ -5,15 +5,14 @@ import java.util.List;
 import com.niit.shoppingcart.model.Category;
 
 public interface CategoryDAO {
-
-	// CRUD Operations
-
-	public Category get(String id);
-
-	public List<Category> list();
-
-	public boolean saveOrUpdate(Category category);
-
-	public boolean delete(String id);
-
+	
+	public boolean save(Category category);		//To insert a Category
+	
+	public boolean update(Category category);	//To update a Category
+	
+	public boolean delete(Category category);	//To delete a Category
+	
+	public Category get(String id);			    //To get Category of Particular Id
+	
+	public List<Category> list();				//To get whole Category table
 }

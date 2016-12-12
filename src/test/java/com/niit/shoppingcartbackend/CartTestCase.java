@@ -1,6 +1,10 @@
-/*package com.niit.shoppingcartbackend;
+package com.niit.shoppingcartbackend;
 
-import org.junit.Assert;
+import static org.junit.Assert.*;
+
+
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,76 +13,84 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import com.niit.shoppingcart.dao.CartDAO;
 import com.niit.shoppingcart.model.Cart;
 
+import junit.framework.Assert;
 
 public class CartTestCase {
+	
 	@Autowired
-	static AnnotationConfigApplicationContext context;
+	SessionFactory sessionFactory;
+
 
 	@Autowired
 	static Cart cart;
-
+	
 	@Autowired
 	static CartDAO cartDAO;
-
+	
+	@Autowired
+	static AnnotationConfigApplicationContext context;
+	
 	@BeforeClass
-	public static void init() {
+	public static void init()
+	{
 		context = new AnnotationConfigApplicationContext();
-		context.scan("backend");
+		context.scan("com.niit");
 		context.refresh();
-
-		cartDAO = (CartDAO) context.getBean("cartDAO");
 		cart = (Cart) context.getBean("cart");
-
-		System.out.println("this objects are created");
-
+		cartDAO = (CartDAO) context.getBean("cartDAO");
+		
 	}
+	
+//@Test
+	public void CreateCartTestCase()
+	{
+		cart.setId(101);
+		cart.setUser_Id("ankur.baghel92@gmail.com");
+		cart.setPrice(30000);
+		cart.setProduct_Name("FZ");
+		boolean status = cartDAO.Save(cart);
+		Assert.assertEquals("CreateCartTestCase", true, status);
+		}
 
+	
+	//@Test
+	public void DeleteCartTestCase()
+	{
+		//cart.setId("001");
+//		Assert.assertEquals("DeleteCartTestCase", true, status);
+	}
+	
+	//@Test
+	public void GetCartTestCase()
+	{
+//		
+	}
+	
 	@Test
-	public void createcartTestCase() {
-		cart.setId("CART_2");
-		cart.setP_id("PRO_2");
+public void getMaxId(){
+	
+		Integer l = cartDAO.getMaxId();
+	System.out.println(l);
+	
+}
 
-		cart.setQuantity(3);
-		cart.setPrice(3900);
 
-		Boolean status = cartDAO.save(cart);
-
-		Assert.assertEquals("create cart Test Case", true, status);
-
-	}
-
-	@Test
-	public void deletecartTestCase() {
-
-		cart.setId("CART_2");
-		Boolean status = cartDAO.delete(cart);
-
-		Assert.assertEquals("Delete cart Test Case", true, status);
-	}
-
-	@Test
-	public void updatecartTestCase() {
-		cart.setId("CART_1");
-		cart.setPrice(45678);
-		cart.setP_id("PRO_2");
-
-		cart.setQuantity(3);
-		Boolean status = cartDAO.update(cart);
-
-		Assert.assertEquals("Update Cart Test Case", true, status);
-	}
-
-	@Test
-	public void getCartTestCase() {
-
-		Assert.assertEquals("get Cart Test Case", null, cartDAO.get("abcd"));
-	}
-
-	@Test
-	public void getAllCartTestCase() {
-
-		Assert.assertEquals("get Cart Test Case", 1, cartDAO.list().size());
-	}
+//@Test
+public void tatalamount(){
+	
+	Long l = cartDAO.get_TotalAmount("ankur.baghel92@gmail.com");
+System.out.println(l);
 
 }
-*/
+
+
+	//@Test
+	public void getListCart()
+	{
+	//	Assert.assertEquals("ListCart", 1, cartDAO.list("ankur.baghel92@gmail.com"));
+		Cart cart= (Cart) cartDAO.list("ankur.baghel92@gmail.com");
+		System.out.println(cart.getPrice());
+	}
+	
+	
+}

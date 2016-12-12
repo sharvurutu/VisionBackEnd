@@ -1,6 +1,6 @@
 package com.niit.shoppingcartbackend;
 
-import org.junit.Assert;
+import static org.junit.Assert.*;
 
 
 import org.junit.BeforeClass;
@@ -11,71 +11,78 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import com.niit.shoppingcart.dao.SupplierDAO;
 import com.niit.shoppingcart.model.Supplier;
 
+import junit.framework.Assert;
 
 public class SupplierTestCase {
+	
 	@Autowired
 	static AnnotationConfigApplicationContext context;
-
-	@Autowired
-	static Supplier supplier;
-
+	
 	@Autowired
 	static SupplierDAO supplierDAO;
-
+	
+	@Autowired
+	static Supplier supplier;
+	
 	@BeforeClass
-	public static void init() {
+	public static void init()
+	{
 		context = new AnnotationConfigApplicationContext();
-		context.scan("backend");
+		context.scan("com.niit");
 		context.refresh();
-
-		supplierDAO = (SupplierDAO) context.getBean("supplierDAO");
 		supplier = (Supplier) context.getBean("supplier");
-
-		System.out.println("this objects are created");
-
+		supplierDAO = (SupplierDAO) context.getBean("supplierDAO");
+				
 	}
-
-	@Test
-	public void createSupplierTestCase() {
-		supplier.setId("SUP_7");
-		supplier.setAddress("VASHI");
-		supplier.setName("PANASONIC");
-
-		Boolean status = supplierDAO.save(supplier);
-
-		Assert.assertEquals("create Supplier Test Case", true, status);
-
+	
+	
+	
+	//@Test
+	public void CreateSupplierTestCase()
+	{
+		supplier.setId("SUP_001");
+		supplier.setName("Supplier1");
+		supplier.setDescription("Supplier123");
+		boolean status = supplierDAO.save(supplier);
+	Assert.assertEquals("CreateSupplierTestCase", true, status);
 	}
-
-	@Test
-	public void deleteSupplierTestCase() {
-
-		supplier.setId("SUP_07");
-		Boolean status = supplierDAO.delete(supplier);
-
-		Assert.assertEquals("Delete  Supplier Test Case", true, status);
+	
+	//@Test
+	public void UpdateSupplierTestCase()
+	{
+		supplier.setId("SUP_001");
+		supplier.setName("Supplier");
+		supplier.setDescription("newSupplier");
+		boolean status = supplierDAO.udpate(supplier);
+		Assert.assertEquals("updateSupplierTestCase", true, status);
 	}
-
-	@Test
-	public void updateSupplierTestCase() {
-		supplier.setId("SUP_6");
-		supplier.setAddress("BANDRA");
-		supplier.setName("FUJIFILM1");
-		Boolean status = supplierDAO.update(supplier);
-
-		Assert.assertEquals("Update  Supplier Test Case", true, status);
+	
+	//@Test
+	public void deleteSupplierTestCase()
+	{
+	supplier.setId("SUP_001");
+	boolean status = supplierDAO.delete(supplier);
+	Assert.assertEquals("DeleteSupplierTestCase", true, status);
 	}
-
+	
 	@Test
-	public void getSupplierTestCase() {
-
-		Assert.assertEquals("get  Supplier Test Case", null, supplierDAO.get("abcd"));
+	public void GetSupplierTestCase()
+	{
+		Supplier supplier  = supplierDAO.get("SUP_001");
+		System.out.println(supplier.getName());
+	//Assert.assertEquals("GetSupplierTestCase",1, supplierDAO.get("SUP_001"));	
 	}
-
-	@Test
-	public void getAllSupplierTestCase() {
-
-		Assert.assertEquals("get Supplier Test Case", 7, supplierDAO.list().size());
+	
+	//@Test
+	public void GetAllCategoryTestCase()
+	{
+		Assert.assertEquals("Get All Category Test Case", 1, supplierDAO.list().size());
+		
+	}
+	
+	//@Test
+	public void test() {
+		fail("Not yet implemented");
 	}
 
 }

@@ -3,114 +3,114 @@ package com.niit.shoppingcart.dao.impl;
 import java.util.List;
 
 
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
-import org.jboss.logging.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.shoppingcart.dao.CartDAO;
-import com.niit.shoppingcart.model.MyCart;
-
+import com.niit.shoppingcart.model.Cart;
 
 @Repository("cartDAO")
-public class CartDAOImpl implements CartDAO {
-
-	private static Logger log = LoggerFactory.getLogger("CartDAOImpl.class");
+public class CartDAOIMPL implements CartDAO {
 	@Autowired
-	private SessionFactory sessionFactory;
+	SessionFactory sessionFactory;
 
-	public CartDAOImpl() {
-
-	}
-
-	public CartDAOImpl(SessionFactory sessionFactory) {
+	public CartDAOIMPL(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
-	}
-
-	@Transactional
-	public void save(MyCart myCart) {
-		log.debug("Starting of the method save");
-		myCart.setId(getMaxId());
-		sessionFactory.getCurrentSession().save(myCart);
-		log.debug("Ending of the method save");
-	}
-
-	@Transactional
-
-	public void update(MyCart myCart) {
-		log.debug("Starting of the method update");
-		sessionFactory.getCurrentSession().update(myCart);
-		log.debug("Ending of the method update");
-	}
-
-	@Transactional
-
-	public String delete(String id) {
-		log.debug("Starting of the method delete");
-		MyCart myCart = new MyCart();
-		myCart.setUserID(id);
-		try
-		{
-			sessionFactory.getCurrentSession().delete(myCart);
-
-		} catch (HibernateException e) {
-
-			e.printStackTrace();
-			return e.getMessage();
-		}
-
-	}
-
-	@Transactional
-	public Long getTotalAmount(String id)
-	{
-		log.debug("Starting of the method getTotalAmount");
-		String hql = "select sum(price) from MyCart where userID="+ " ' "+id+" ' "+" and status ="+"'N'";
-		log.debug("hql"+hql);
-		
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		Long sum = (Long) query.uniqueResult();
-		log.debug("sum=" +sum);
-		
-		log.debug("Ending of the method getTotalAmount");
-		return sum;
-	}
-
-	@Transactional
-	private long getMaxId()
-	{
-		log.debug("Starting of the method getMaxId");
-		long maxID = 100L;
-		try
-		{
-			String hql = "select max(id) from MyCart";
-			Query query = sessionFactory.getCurrentSession().createQuery(hql);
-			maxID= (Long) query.uniqueResult();
-		}
-		catch(HibernateException e)
-		{
-			log.debug("It seems this is first record. setting initial id is 100:");
-			maxID = 100L;
-			e.printStackTrace();
-		}
-		log.debug("Max id:"+maxID);
-		
-		log.debug("Ending of the method getMaxId");
-		return maxID;
 	}
 	
 	@Transactional
-	public List<MyCart> list(String id) {
-		log.debug("Starting of the method list");
-		String hql = "from MyCart where userID=" + " ' " + id + " ' and status =" + "'N'";
+	public boolean Save(Cart cart) {
+		try {
+			/*if (get(cart.getId()) != null) {
+				return false;
+			}*/
+			sessionFactory.getCurrentSession().save(cart);
+			return true;
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	@Transactional
+	public boolean delete(String Id) {
+		Cart cart = new Cart();
+		cart.setUser_Id(Id);
+		try {			
+			sessionFactory.getCurrentSession().delete(cart);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Transactional
+	public Cart get(Integer Id) {
+
+		return (Cart) sessionFactory.getCurrentSession().get(Cart.class, Id);
+	}
+
+	@Transactional
+	public List<Cart> list(String Id) {
+		String hql="FROM Cart WHERE USER_ID=:user_id";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		List<MyCart> list = (List<MyCart>) query.list();
-		log.debug("Ending of the method list");
+		query.setString("user_id", Id);
+		List<Cart> list = query.list();
 		return list;
 	}
 
+	public boolean update(Cart cart) {
+		return false;
+	}
+
+	@Transactional
+	public Long get_TotalAmount(String Id) {
+		
+		String hql="select sum(price) from Cart where USER_ID=:user_id";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setString("user_id", Id);
+		Long sum = (Long) query.uniqueResult();
+		return sum;
+	}
+	
+	@Transactional
+	public Integer getMaxId(){
+		
+		Integer MaxId=100;
+		try{
+			String hql="select max(id) from Cart";
+			Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		
+MaxId=(Integer) query.uniqueResult();
+}
+		catch(Exception e)
+		{
+			MaxId=100;
+			e.printStackTrace();
+		}
+
+		return (MaxId+1);
+	}
+
+
+	
+	@Transactional
+	public boolean deleteByCartId(Cart cart) {
+		try {			
+			sessionFactory.getCurrentSession().delete(cart);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	
 }

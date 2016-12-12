@@ -5,15 +5,12 @@ import java.util.List;
 import com.niit.shoppingcart.model.User;
 
 public interface UserDAO {
-
-	public boolean saveOrUpdate(User order);
-
+	
+	public boolean save(User user);
 	public boolean delete(User user);
-
-	public User get(String id);
-
+	public boolean update(User user);
+	public User get(String userId);
+	public User IsValidUser(String mail, String password);
 	public List<User> list();
-
-	public User isValidUser(String userID, String password);
 
 }

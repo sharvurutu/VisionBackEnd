@@ -1,101 +1,123 @@
 package com.niit.shoppingcart.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
-import org.springframework.stereotype.Component;
-
-
+import javax.persistence.*;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Columns;
+import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
-@Table(name = "product")
 @Component
+@Table(name="PRODUCT")
 public class Product {
 	
+@Id	
+private String Id;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@NotNull
-	@Column(name = "ID")
-	private String id;
-	
-	@NotNull
-	@Column(name = "NAME")
-	private String name;
-	
-	@NotNull
-	@Column(name = "PRICE")
-	private int price;
-	
-	@NotNull
-	@Column(name = "STOCK")
-	private int stock;
-	
-	@NotNull
-	@Column(name = "C_ID")
-	private String c_id;
-	
-	@NotNull
-	@Column(name = "S_ID")
-	private String s_id;
-	
-	@ManyToOne
-	@JoinColumn(name="category_id",updatable=false,insertable=false,nullable=false)
-	private Category category;
+@Column(name="NAME")
+private String name;
 
-	public String getId() {
-		return id;
-	}
+@Column(name="PRICE")
+private int price;
 
-	public void setId(String id) {
-		this.id = id;
-	}
+@Column(name="C_ID")
+private String C_Id;
 
-	public String getName() {
-		return name;
-	}
+@Column(name="S_ID")
+private String S_Id;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+@Column(name="STOCK")
+private int stock;
 
-	public int getPrice() {
-		return price;
-	}
+@ManyToOne(fetch=FetchType.EAGER)
+@JoinColumn(name="C_Id",updatable=false,insertable=false,nullable=false)
+private Category category;
 
-	public void setPrice(int price) {
-		this.price = price;
-	}
+@ManyToOne
+@JoinColumn(name="S_Id",nullable=false,insertable=false,updatable=false)
+private Supplier supplier;
 
-	public int getStock() {
-		return stock;
-	}
+@Transient
+private MultipartFile image;
 
-	public void setStock(int stock) {
-		this.stock = stock;
-	}
+@Transient
+private String path ="D:\\DT NIIT\\yamahaonline\\ProductImages";
 
-	public String getC_id() {
-		return c_id;
-	}
 
-	public void setC_id(String c_id) {
-		this.c_id = c_id;
-	}
 
-	public String getS_id() {
-		return s_id;
-	}
 
-	public void setS_id(String s_id) {
-		this.s_id = s_id;
-	}
+
+
+public String getPath() {
+	return path;
+}
+
+public void setPath(String path) {
+	this.path = path;
+}
+
+
+
+
+
+public MultipartFile getImage() {
+	return image;
+}
+
+public void setImage(MultipartFile image) {
+	this.image = image;
+}
+
+public String getId() {
+	return Id;
+}
+
+public void setId(String id) {
+	this.Id = id;
+}
+
+public String getName() {
+	return name;
+}
+
+public void setName(String name) {
+	this.name = name;
+}
+
+public int getPrice() {
+	return price;
+}
+
+public void setPrice(int price) {
+	this.price = price;
+}
+
+public String getC_Id() {
+	return C_Id;
+}
+
+public void setC_Id(String c_Id) {
+	C_Id = c_Id;
+}
+
+public String getS_Id() {
+	return S_Id;
+}
+
+public void setSupplier_Id(String s_Id) {
+	S_Id = s_Id;
+}
+
+public int getStock() {
+	return stock;
+}
+
+public void setStock(int stock) {
+	this.stock = stock;
+}
+
 
 }

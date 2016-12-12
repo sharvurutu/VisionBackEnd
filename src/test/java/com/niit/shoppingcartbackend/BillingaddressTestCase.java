@@ -1,6 +1,6 @@
 package com.niit.shoppingcartbackend;
 
-import org.junit.Assert;
+import static org.junit.Assert.*;
 
 
 import org.junit.BeforeClass;
@@ -8,80 +8,49 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.niit.shoppingcart.dao.BillingaddressDAO;
-import com.niit.shoppingcart.model.Billingaddress;
+import com.niit.shoppingcart.dao.BillingAddressDAO;
+import com.niit.shoppingcart.model.BillingAddress;
 
+import junit.framework.Assert;
 
-
-public class BillingaddressTestCase {
-
+public class BillingAddressTestCase {
+	
+	@Autowired
+	static BillingAddressDAO billingaddressDAO;
+	
+	@Autowired
+	static BillingAddress billingAddress; 
+	
 	@Autowired
 	static AnnotationConfigApplicationContext context;
-
-	@Autowired
-	static Billingaddress billingaddress;
-
-	@Autowired
-	static BillingaddressDAO billingaddressDAO;
-
+	
 	@BeforeClass
-	public static void init() {
-		context = new AnnotationConfigApplicationContext();
-		context.scan("backend");
+	public static void init()
+	{	
+		context  = new AnnotationConfigApplicationContext();
+		context.scan("com.niit");
 		context.refresh();
-
-		billingaddressDAO = (BillingaddressDAO) context.getBean("billingaddressDAO");
-		billingaddress = (Billingaddress) context.getBean("billingaddress");
-
-		System.out.println("this objects are created");
-
+		billingaddressDAO = (BillingAddressDAO) context.getBean("billingaddressDAO");
+		billingAddress =  (BillingAddress) context.getBean("billingAddress");
+	}
+	
+	
+	@Test
+	public void AddBillingAddressTestCase()
+	{
+		//billingAddress.setId("BA_001");
+		billingAddress.setAddress_line1("QTR NO 8/3");
+		billingAddress.setAddress_line2("Type-II Rangehills");
+		billingAddress.setCity("Pune");
+		billingAddress.setState("Maharashtra");
+		billingAddress.setPincode("411020");
+		boolean status = billingaddressDAO.save(billingAddress);
+		Assert.assertEquals("BillingAddressCreateTestCase", true, status);
 	}
 
-	@Test
-	public void createBillingaddressTestCase() {
-		billingaddress.setId("BL_4");
-		billingaddress.setH_no("Matrukrupa 9094");
-		billingaddress.setStreet("MUMBAI ROAD");
-		billingaddress.setCity("PUNE");
-		billingaddress.setCountry("INDIA");
-		billingaddress.setPin("26011994");
-
-		Boolean status = billingaddressDAO.save(billingaddress);
-
-		Assert.assertEquals("create Billingaddress Test Case", true, status);
-
-	}
-
-	@Test
-	public void deleteBillingaddressTestCase() {
-
-		billingaddress.setId("BL_3");
-
-		Boolean status = billingaddressDAO.delete(billingaddress);
-
-		Assert.assertEquals("Delete Billingaddress Test Case", true, status);
-	}
-
-	@Test
-	public void updateBillingaddressTestCase() {
-		billingaddress.setId("BL_1");
-		billingaddress.setH_no("Sharvari 9094");
-
-		Boolean status = billingaddressDAO.update(billingaddress);
-
-		Assert.assertEquals("Update Billingaddress Test Case", true, status);
-	}
-
-	@Test
-	public void getBillingaddressTestCase() {
-
-		Assert.assertEquals("get Billingaddress Test Case", null, billingaddressDAO.get("abcd"));
-	}
-
-	@Test
-	public void getAllBillingaddressTestCase() {
-
-		Assert.assertEquals("get Billingaddress Test Case", 3, billingaddressDAO.list().size());
+	//@Test
+	public void test() {
+		fail("Not yet implemented");
 	}
 
 }

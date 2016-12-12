@@ -1,7 +1,6 @@
 package com.niit.shoppingcartbackend;
 
-import org.junit.Assert;
-
+import org.hibernate.SessionFactory;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -9,79 +8,84 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.niit.shoppingcart.dao.UserDAO;
+import com.niit.shoppingcart.model.Login;
 import com.niit.shoppingcart.model.User;
 
+import junit.framework.Assert;
 
 public class UserTestCase {
-
-	@Autowired
-	static AnnotationConfigApplicationContext context;
 
 	@Autowired
 	static User user;
 
 	@Autowired
+	static Login login;
+
+	@Autowired
 	static UserDAO userDAO;
+
+	@Autowired
+	static AnnotationConfigApplicationContext context;
 
 	@BeforeClass
 	public static void init() {
 		context = new AnnotationConfigApplicationContext();
-		context.scan("backend");
+		context.scan("com.niit");
 		context.refresh();
-
 		userDAO = (UserDAO) context.getBean("userDAO");
 		user = (User) context.getBean("user");
-
-		System.out.println("this objects are created");
-
+		login = (Login) context.getBean("login");
 	}
 
 	@Test
-	public void createuserTestCase() {
-		user.setId("U_4");
-		user.setName("PURVA");
-		user.setPassword("PURVI");
-		user.setContact(98765431);
-		user.setRole("USER");
-		user.setAddress("VAJIRABAD,NANDED");
-		user.setMail("purva@gmail.com");
+	public void CreateuserTestCase() {
 
-		Boolean status = userDAO.save(user);
-
-		Assert.assertEquals("create user Test Case", true, status);
+		user.setName("Rutuja");
+		user.setLast_name("Bacchuwar");
+		user.setContact("9561774800");
+		user.setMail("rutu956177@gmail.com");
+		user.setPassword("rutusharvu");
+		user.setAddress("pune");
+		user.setRole("Admin");
+		boolean status = userDAO.save(user);
+		Assert.assertEquals("Create user Test Case", true, status);
 
 	}
 
-	@Test
-	public void deleteuserTestCase() {
-
-		user.setId("U_1");
-		Boolean status = userDAO.delete(user);
-
-		Assert.assertEquals("Delete user Test Case", true, status);
-	}
-
-	@Test
-	public void updateuserTestCase() {
-		user.setId("U_4");
-
-		user.setPassword("PURVA1");
-
-		Boolean status = userDAO.update(user);
-
+	/*
+	 * // @Test public void DeleteuserTestCase() { user.setUserId("Y001");
+	 * boolean status = userDAO.delete(user); Assert.assertEquals(
+	 * "Delete user Test Case", true, status);
+	 * 
+	 * }
+	 * 
+	 */ // @Test
+	public void UpdateuserTestCase() {
+		boolean status = userDAO.update(user);
 		Assert.assertEquals("Update user Test Case", true, status);
+
 	}
 
-	@Test
-	public void getuserTestCase() {
-
-		Assert.assertEquals("get user Test Case", null, userDAO.get("abcd"));
+	// @Test
+	public void GetuserTestCase() {
+		Assert.assertEquals("Get One user Test Case", null, userDAO.get("Y001"));
 	}
 
-	@Test
-	public void getAlluserTestCase() {
+	// @Test
+	public void GetAlluserTestCase() {
+		Assert.assertEquals("Get All user Test Case", 1, userDAO.list().size());
 
-		Assert.assertEquals("get user Test Case", 4, userDAO.list().size());
+	}
+
+	// @Test
+	public void IsValidUserTestCase() {
+		User u = userDAO.IsValidUser("rutu956177@gmail.com", "sharvurutu");
+		System.out.println(u.getName());
+		System.out.println(u.getRole());
+		System.out.println(u.getContact());
+		System.out.println(u.getMail());
+		System.out.println(u.getLast_name());
+
 	}
 
 }

@@ -38,13 +38,9 @@ public class UserOrderTestCase {
 	@Test
 	public void CreateuserOrderTestCase()
 	{
-		//userOrder.setId("UO-001");
-		userOrder.setProduct_Name("Productname");
-		userOrder.setProduct_Price(567);
-		userOrder.setUser_Id("asdjksh");
-		/*userOrder.setBillingAddress("BA_001");
-		userOrder.setShippingAddress("SA_001");
-	*/	//userOrder.setPay_method("Online");
+		userOrder.setProduct_Name("gkgkjg");
+		userOrder.setProduct_Price(67);
+		userOrder.setUser_Id("mbmm");
 		boolean status= userorderDAO.save(userOrder);
 		Assert.assertEquals("CreateuserOrderTestCase", true, status);
 	}

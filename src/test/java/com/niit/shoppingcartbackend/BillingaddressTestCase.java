@@ -2,7 +2,7 @@ package com.niit.shoppingcartbackend;
 
 import static org.junit.Assert.*;
 
-
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import com.niit.shoppingcart.dao.BillingAddressDAO;
 import com.niit.shoppingcart.model.BillingAddress;
 
-import junit.framework.Assert;
+
 
 public class BillingAddressTestCase {
 	

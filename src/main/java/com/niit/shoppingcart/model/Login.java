@@ -11,11 +11,11 @@ import com.sun.istack.internal.NotNull;
 @Component
 public class Login {	
 	@NotNull
-	@Size(min=6,max=30,message="Username Should be Between 6 to 30")
+	@Size(min=6,max=30,message="Userusername Should be Between 4 to 10")
 	private String username;
 	
 	@NotNull
-	@Size(min=4,max=30,message="Password Should be Between 6 to 10")
+	@Size(min=4,max=30,message="passwordword Should be Between 4 to 10")
 	private String password;
 	
 	public String getUsername() {
@@ -24,10 +24,10 @@ public class Login {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getPassword() {
+	public String getpassword() {
 		return password;
 	}
-	public void setPassword(String password) {
+	public void setpassword(String password) {
 		this.password = password;
 	}
 	

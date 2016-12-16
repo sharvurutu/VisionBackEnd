@@ -40,13 +40,13 @@ public class UserTestCase {
 	@Test
 	public void CreateuserTestCase() {
 
-		user.setName("Rutuja");
-		user.setLast_name("Bacchuwar");
-		user.setContact("9561774800");
-		user.setMail("rutu956177@gmail.com");
-		user.setPassword("rutusharvu");
-		user.setAddress("pune");
-		user.setRole("Admin");
+		user.setFname("sharvari");
+		user.setLast_name("deshmukh");
+		//user.setMobile("123456789");
+		user.setmail("sachin.t@gmail.com");
+		user.setPassword("SachinT");
+		// user.setAddress("pune");
+		user.setRole("User");
 		boolean status = userDAO.save(user);
 		Assert.assertEquals("Create user Test Case", true, status);
 
@@ -79,11 +79,12 @@ public class UserTestCase {
 
 	// @Test
 	public void IsValidUserTestCase() {
-		User u = userDAO.IsValidUser("rutu956177@gmail.com", "sharvurutu");
-		System.out.println(u.getName());
+
+		User u = userDAO.IsValidUser("Rutuja", "sharvurutu");
+		System.out.println(u.getFname());
 		System.out.println(u.getRole());
-		System.out.println(u.getContact());
-		System.out.println(u.getMail());
+		//System.out.println(u.getMobile());
+		System.out.println(u.getmail());
 		System.out.println(u.getLast_name());
 
 	}

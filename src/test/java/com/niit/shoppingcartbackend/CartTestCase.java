@@ -45,9 +45,9 @@ public class CartTestCase {
 	public void CreateCartTestCase()
 	{
 		cart.setId(101);
-		cart.setUser_Id("ankur.baghel92@gmail.com");
-		cart.setPrice(30000);
-		cart.setProduct_Name("FZ");
+		cart.setUser_Id("rutu956177@gmail.com");
+		cart.setPrice(90000);
+		cart.setProduct_Name("dslr");
 		boolean status = cartDAO.Save(cart);
 		Assert.assertEquals("CreateCartTestCase", true, status);
 		}
@@ -78,7 +78,7 @@ public void getMaxId(){
 //@Test
 public void tatalamount(){
 	
-	Long l = cartDAO.get_TotalAmount("ankur.baghel92@gmail.com");
+	Long l = cartDAO.get_TotalAmount("rutu956177@gmail.com");
 System.out.println(l);
 
 }
@@ -87,8 +87,8 @@ System.out.println(l);
 	//@Test
 	public void getListCart()
 	{
-	//	Assert.assertEquals("ListCart", 1, cartDAO.list("ankur.baghel92@gmail.com"));
-		Cart cart= (Cart) cartDAO.list("ankur.baghel92@gmail.com");
+	//	Assert.assertEquals("ListCart", 1, cartDAO.list(""rutu956177@gmail.com""));
+		Cart cart= (Cart) cartDAO.list("rutu956177@gmail.com");
 		System.out.println(cart.getPrice());
 	}
 	

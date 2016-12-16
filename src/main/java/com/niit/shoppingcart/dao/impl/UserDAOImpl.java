@@ -2,6 +2,7 @@ package com.niit.shoppingcart.dao.impl;
 
 import java.sql.PreparedStatement;
 
+
 import java.sql.ResultSet;
 import java.util.List;
 
@@ -96,12 +97,12 @@ return (User) sessionFactory.getCurrentSession().get(User.class, UserId) ;
 	}
 
 @Transactional
-	public User IsValidUser(String mail, String password) {
+	public User IsValidUser(String name, String pass) {
 	try{
-		String hql = "FROM User o where o.mail= :mail and o.password= :password";
+		String hql = "FROM User o where o.name= :name and o.pass= :pass";
 		Query st  = sessionFactory.getCurrentSession().createQuery(hql);
-		st.setString("mail", mail);
-		st.setString("password", password);
+		st.setString("name", name);
+		st.setString("pass", pass);
 	return (User) st.uniqueResult();
 	
 	}

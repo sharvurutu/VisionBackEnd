@@ -2,6 +2,7 @@ package com.niit.shoppingcartbackend;
 
 import org.junit.BeforeClass;
 
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -36,9 +37,9 @@ public class CategoryTestCase {
 	//@Test
 	public void CreateCategoryTestCase()
 	{
-		category.setId("Y004");
-		category.setDescription("Yamaha5644");
-		category.setName("FZ4854");
+		category.setId("04");
+		category.setDescription("cat");
+		category.setName("DSLR");
 		boolean status = categoryDAO.save(category);
 		Assert.assertEquals("Create Category Test Case", true, status);
 		
@@ -47,7 +48,7 @@ public class CategoryTestCase {
 	//@Test
 	public void DeleteCategoryTestCase()
 	{
-		category.setId("Y001");
+		category.setId("01");
 		boolean status = categoryDAO.delete(category);
 		Assert.assertEquals("Delete Category Test Case", true, status);
 	
@@ -55,9 +56,9 @@ public class CategoryTestCase {
 	//@Test
 	public void UpdateCategoryTestCase()
 	{
-		category.setId("Y001");
-		category.setDescription("Yamaha1223");
-		category.setName("ankur");
+		category.setId("01");
+		category.setDescription("Cat");
+		category.setName("Rutu");
 		boolean status = categoryDAO.update(category);
 		Assert.assertEquals("Update Category Test Case", true, status);
 		
@@ -66,7 +67,7 @@ public class CategoryTestCase {
 	@Test
 	public void GetCategoryTestCase()
 	{
-		Assert.assertEquals("Get One Category Test Case", null, categoryDAO.get("Y001"));
+		Assert.assertEquals("Get One Category Test Case", null, categoryDAO.get("01"));
 	}
 
 	/*@Test

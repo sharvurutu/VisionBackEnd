@@ -81,7 +81,7 @@ public class UserTestCase {
 	//@Test
 	public void IsValidUserTestCase()
 	{
-/*		Assert.assertEquals("asdsads", 1, userDAO.IsValidUser("ankur", "baghel"));
+/*		Assert.assertEquals("asdsads", 1, userDAO.IsValidUser("Rutuja", "bacchuwar"));
 */		User u = userDAO.IsValidUser("asdsjk", "baghel1");
 		System.out.println(u.getFname());
 		System.out.println(u.getRole());

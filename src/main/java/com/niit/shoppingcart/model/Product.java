@@ -11,113 +11,103 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Component
-@Table(name="PRODUCT")
+@Table(name = "PRODUCT")
 public class Product {
-	
-@Id	
-private String Id;
-	
-@Column(name="NAME")
-private String name;
 
-@Column(name="PRICE")
-private int price;
+	@Id
+	private String Id;
 
-@Column(name="C_ID")
-private String C_Id;
+	@Column(name = "NAME")
+	private String name;
 
-@Column(name="S_ID")
-private String S_Id;
+	@Column(name = "PRICE")
+	private int price;
 
-@Column(name="STOCK")
-private int stock;
+	@Column(name = "C_ID")
+	private String C_Id;
 
-@ManyToOne(fetch=FetchType.EAGER)
-@JoinColumn(name="C_Id",updatable=false,insertable=false,nullable=false)
-private Category category;
+	@Column(name = "S_ID")
+	private String S_Id;
 
-@ManyToOne
-@JoinColumn(name="S_Id",nullable=false,insertable=false,updatable=false)
-private Supplier supplier;
+	@Column(name = "STOCK")
+	private int stock;
 
-@Transient
-private MultipartFile image;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "C_Id", updatable = false, insertable = false, nullable = false)
+	private Category category;
 
-@Transient
-private String path ="D:\\DT NIIT\\yamahaonline\\ProductImages";
+	@ManyToOne
+	@JoinColumn(name = "S_Id", nullable = false, insertable = false, updatable = false)
+	private Supplier supplier;
 
+	@Transient
+	private MultipartFile image;
 
+	@Transient
+	private String path = "E:\\Project1\\Images";
 
+	public String getPath() {
+		return path;
+	}
 
+	public void setPath(String path) {
+		this.path = path;
+	}
 
+	public MultipartFile getImage() {
+		return image;
+	}
 
-public String getPath() {
-	return path;
-}
+	public void setImage(MultipartFile image) {
+		this.image = image;
+	}
 
-public void setPath(String path) {
-	this.path = path;
-}
+	public String getId() {
+		return Id;
+	}
 
+	public void setId(String id) {
+		this.Id = id;
+	}
 
+	public String getName() {
+		return name;
+	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
 
+	public int getPrice() {
+		return price;
+	}
 
-public MultipartFile getImage() {
-	return image;
-}
+	public void setPrice(int price) {
+		this.price = price;
+	}
 
-public void setImage(MultipartFile image) {
-	this.image = image;
-}
+	public String getC_Id() {
+		return C_Id;
+	}
 
-public String getId() {
-	return Id;
-}
+	public void setC_Id(String c_Id) {
+		C_Id = c_Id;
+	}
 
-public void setId(String id) {
-	this.Id = id;
-}
+	public String getS_Id() {
+		return S_Id;
+	}
 
-public String getName() {
-	return name;
-}
+	public void setSupplier_Id(String s_Id) {
+		S_Id = s_Id;
+	}
 
-public void setName(String name) {
-	this.name = name;
-}
+	public int getStock() {
+		return stock;
+	}
 
-public int getPrice() {
-	return price;
-}
-
-public void setPrice(int price) {
-	this.price = price;
-}
-
-public String getC_Id() {
-	return C_Id;
-}
-
-public void setC_Id(String c_Id) {
-	C_Id = c_Id;
-}
-
-public String getS_Id() {
-	return S_Id;
-}
-
-public void setSupplier_Id(String s_Id) {
-	S_Id = s_Id;
-}
-
-public int getStock() {
-	return stock;
-}
-
-public void setStock(int stock) {
-	this.stock = stock;
-}
-
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
 
 }

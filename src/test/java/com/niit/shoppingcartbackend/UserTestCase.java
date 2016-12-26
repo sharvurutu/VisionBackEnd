@@ -40,13 +40,13 @@ public class UserTestCase {
 	@Test
 	public void CreateuserTestCase() {
 
-		user.setFname("sachin");
-		user.setLname("Tendulkar");
-		user.setMobile("112233445");
-		user.setEmail("sachin.t@gmail.com");
-		user.setPassword("SachinT");
+		user.setFname("Rutu");
+		user.setLname("Bacchuwar");
+		user.setMobile("9657176185");
+		user.setEmail("rutu@gmail.com");
+		user.setPassword("rutusharvu");
 		//user.setAddress("pune");
-		user.setRole("User");
+		user.setRole("Admin");
 		boolean status = userDAO.save(user);
 		Assert.assertEquals("Create user Test Case", true, status);
 
@@ -54,14 +54,14 @@ public class UserTestCase {
 
 	/*// @Test
 	public void DeleteuserTestCase() {
-		user.setUserId("Y001");
+		user.setUserId("C01");
 		boolean status = userDAO.delete(user);
 		Assert.assertEquals("Delete user Test Case", true, status);
 
 	}
 
 */	// @Test
-	public void UpdateuserTestCase() {
+	/*public void UpdateuserTestCase() {
 		boolean status = userDAO.update(user);
 		Assert.assertEquals("Update user Test Case", true, status);
 
@@ -81,8 +81,8 @@ public class UserTestCase {
 	//@Test
 	public void IsValidUserTestCase()
 	{
-/*		Assert.assertEquals("asdsads", 1, userDAO.IsValidUser("Rutuja", "bacchuwar"));
-*/		User u = userDAO.IsValidUser("asdsjk", "baghel1");
+		Assert.assertEquals("asdsads", 1, userDAO.IsValidUser("Rutuja", "bacchuwar"));
+		User u = userDAO.IsValidUser("rutuja", "bacchuwar");
 		System.out.println(u.getFname());
 		System.out.println(u.getRole());
 		System.out.println(u.getMobile());
@@ -92,7 +92,8 @@ public class UserTestCase {
 		}
 	
 }
-
+*/
+}
 /*package com.niit.shoppingcartbackend;
 
 import org.hibernate.SessionFactory;
